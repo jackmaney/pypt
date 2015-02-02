@@ -1,0 +1,21 @@
+{% set update_requirements = 0 %}
+{% if requirements_file %}
+try:
+    with open("{{requirements_file}}") as f:
+        requirements = [x for x in [y.strip() for y in f.readlines()] if x]
+except IOError:
+    requirements = []
+{% set update_requirements = 1 %}
+{% elif requirements_list %}
+requirements=[{{requirements_list | join(', ')}}]
+{% set update_requirements = 1 %}
+{% endif %}
+
+{% if update_requirements > 0 %}
+{#
+    Setting install_requires=requirements within the setup function.
+    This requires setup_kwargs to be defined outside of this scope!!!
+#}
+{% do setup_kwargs.update({"install_requires":"requirements"}) %}
+{% endif %}
+\n

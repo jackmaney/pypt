@@ -1,0 +1,9 @@
+setuptools.setup(
+{% if setup_kwargs %}
+{% for name, value in setup_kwargs.iteritems() %}
+    {{name}}={{value}},
+    {% endfor %}
+    {% endif %}
+    long_description=long_description
+)
+\n

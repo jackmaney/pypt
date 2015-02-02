@@ -1,0 +1,11 @@
+import setuptools {# importing the whole thing is easier than yet another layer... #}
+{# Note that each include file ends with the string literal '\n'. This is used later for prettification #}
+\n
+\n
+{% include "long_description.j2" %}
+
+{% include "requirements.j2" %}
+
+{% include "packages.j2" %}
+
+{% include "setup.j2" %}
