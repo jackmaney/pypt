@@ -17,7 +17,7 @@ except IOError:
 
 setup(
     name="pip-create",
-    version="0.2.1",
+    version="0.2.2",
     description="Tools to create a Python distribution for use with pip",
     long_description=long_description,
     license='MIT',

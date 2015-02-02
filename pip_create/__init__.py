@@ -135,7 +135,7 @@ your distribution:\n")
                                      re.split("\s*,\s*", p_list) if x]
 
     # Set up Jinja2 template engine
-    env = jinja2.Environment(loader=jinja2.PackageLoader('pip_init',
+    env = jinja2.Environment(loader=jinja2.PackageLoader('pip_create',
                                                          'templates'),
                              extensions=['jinja2.ext.do'])
 
