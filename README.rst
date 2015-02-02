@@ -1,57 +1,29 @@
-========
-pip-init
-========
+pip-create
+==========
 
-.. image:: https://pypip.in/v/pip-init/badge.png
-    :target: https://pypi.python.org/pypi/pip-init
+Tools to simplify the process of creating and sharing Python distributions to `pypi <https://pypi.python.org/pypi>`_.
 
-.. image:: https://travis-ci.org/juanpabloaj/pip-init.svg?branch=master
-    :target: https://travis-ci.org/juanpabloaj/pip-init
-
-Generate a base setup.py file to upload a python package to `pypi <https://pypi.python.org/pypi>`_
+This is a fork of `pip-init <https://github.com/juanpabloaj/pip-init>`_ by `@juanpabloaj <https://github.com/juanpabloaj>`_. The primary difference is that it makes use of the `Jinja2 <http://jinja.pocoo.org/>`_ templating engine to make the code templates more extensible.
 
 Install
 =======
 
 ::
 
-    pip install pip-init
+    pip install pip-create
+
+Or, you can clone this repository, navigate to the directory in which you cloned this repository, and do a
+
+::
+
+    python setup.py install
 
 Usage
 =====
 
 ::
 
-    pip-init
+    pip-create
 
-.. image:: http://i.imgur.com/1Wg46cR.gif
 
-I created a setup.py file, what are the next steps?
-====================================================
-
-What are the next steps to upload a package to `pypi <https://pypi.python.org/pypi>`_?
-
-* Create or edit the python code of your package: ::
-
-    mkdir package_code
-    $EDITOR package_code/__init__.py
-
-* Create an account on the `PyPI website <https://pypi.python.org/pypi?%3Aaction=register_form>`_.
-* Create a ~/.pypirc file ::
-
-    [pypi]
-    repository = https://pypi.python.org/pypi
-    username = <username>
-    password = <password>
-
-* Register and upload your package to pypi ::
-
-    python setup.py register
-    python setup.py sdist upload -r pypi
-
-References
-==========
-* `Packaging and Distributing Projects, pypa. <https://packaging.python.org/en/latest/distributing.html>`_
-* `Sharing Your Labor of Love: PyPI Quick and Dirty, Hynek Schlawack. <https://hynek.me/articles/sharing-your-labor-of-love-pypi-quick-and-dirty/>`_
-* `Open Sourcing a Python Project the Right Way, Jeff Knupp. <http://www.jeffknupp.com/blog/2013/08/16/open-sourcing-a-python-project-the-right-way/>`_
-* `Empaquetando y distribuyendo código python con pip (spanish), JuanPabloAJ. <https://speakerdeck.com/juanpabloaj/enpaquetando-y-distribuyendo-codigo-python-con-pip>`_
+...and then just follow the interactive prompts. Once you're done, you'll have a bright, new, shiny `setup.py`.

@@ -1,3 +1,3 @@
-include pip_init/templates/*.j2
+include pip_create/templates/*.j2
 include README.rst
 include requirements.txt
