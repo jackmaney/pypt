@@ -41,6 +41,23 @@ def get_username():
     return username
 
 
+def get_email():
+
+    try:
+        git_command = ['git', 'config', '--global', 'user.email']
+        p = Popen(git_command, stdout=PIPE, stderr=PIPE)
+        output, err = p.communicate()
+
+        email = output.decode('utf-8').strip()
+
+        if not email:
+            return None
+
+    except OSError:
+
+        return None
+
+
 def main():
 
     setup_kwargs = {}
@@ -56,6 +73,7 @@ def main():
             "default": "%s is a package" % os.path.relpath(".", "..")},
         {"name": "License", "default": "MIT"},
         {"name": "Author", "default": get_username()},
+        {"name": "Author Email", "arg":"author_email", "default":get_email()},
         {"name": "Requirements", "description": dedent("""
         Would you like to read your requirements from a [f]ile?
         Would you like to [s]pecify your requirements manually?
@@ -72,18 +90,23 @@ def main():
     for field in fields:
 
         if "default" in field:
-            user_input = get_input("{} ({}): ".format(field["name"],
-                                                      field["default"]))
+
+            if field["default"]:
+                user_input = get_input("{} ({}): ".format(field["name"],
+                                                          field["default"]))
+            else:
+                user_input = get_input("{}: ".format(field["name"]))
 
             if not user_input:
                 user_input = field["default"]
 
-            arg = field["name"].lower()
+            if user_input:
+                arg = field["name"].lower()
 
-            if "arg" in field:
-                arg = field["arg"]
+                if "arg" in field:
+                    arg = field["arg"]
 
-            setup_kwargs[arg] = "'%s'" % user_input
+                setup_kwargs[arg] = "'%s'" % user_input
 
         elif field["name"] == "Requirements":
             user_input = None
