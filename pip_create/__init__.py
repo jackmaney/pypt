@@ -7,6 +7,7 @@ from getpass import getuser
 from textwrap import dedent
 import os
 import re
+from _version import __version__
 
 
 def get_input(input_msg):

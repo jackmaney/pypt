@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup
+from pip_create._version import __version__
 
 
 try:
@@ -17,7 +18,7 @@ except IOError:
 
 setup(
     name="pip-create",
-    version="0.2.2",
+    version=__version__,
     description="Tools to create a Python distribution for use with pip",
     long_description=long_description,
     license='MIT',
