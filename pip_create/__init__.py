@@ -53,10 +53,13 @@ def get_email():
 
         if not email:
             return None
+        else:
+            return email
 
     except OSError:
 
         return None
+
 
 
 def main():
