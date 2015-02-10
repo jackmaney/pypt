@@ -1,65 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import jinja2
-from sys import version_info
-from subprocess import Popen, PIPE
-from getpass import getuser
 from textwrap import dedent
 import os
 import re
 from _version import __version__
-
-
-def get_input(input_msg):
-
-    if version_info >= (3, 0):
-        return input(input_msg)
-    else:
-        return raw_input(input_msg)
-
-
-def get_username():
-    '''Get git config values.'''
-    username = ''
-
-    # use try-catch to prevent crashes if user doesn't install git
-    try:
-        # run git config --global <key> to get username
-        git_command = ['git', 'config', '--global', 'user.name']
-        p = Popen(git_command, stdout=PIPE, stderr=PIPE)
-        output, err = p.communicate()
-
-        # turn stdout into unicode and strip it
-        username = output.decode('utf-8').strip()
-
-        # if user doesn't set global git config name, then use getuser()
-        if not username:
-            username = getuser()
-    except OSError:
-        # if git command is not found, then use getuser()
-        username = getuser()
-
-    return username
-
-
-def get_email():
-
-    try:
-        git_command = ['git', 'config', '--global', 'user.email']
-        p = Popen(git_command, stdout=PIPE, stderr=PIPE)
-        output, err = p.communicate()
-
-        email = output.decode('utf-8').strip()
-
-        if not email:
-            return None
-        else:
-            return email
-
-    except OSError:
-
-        return None
-
+from util import get_email, get_username, get_input
 
 
 def main():
@@ -77,7 +23,8 @@ def main():
             "default": "%s is a package" % os.path.relpath(".", "..")},
         {"name": "License", "default": "MIT"},
         {"name": "Author", "default": get_username()},
-        {"name": "Author Email", "arg":"author_email", "default":get_email()},
+        {"name": "Author Email", "arg": "author_email",
+            "default": get_email()},
         {"name": "Requirements", "description": dedent("""
         Would you like to read your requirements from a [f]ile?
         Would you like to [s]pecify your requirements manually?
