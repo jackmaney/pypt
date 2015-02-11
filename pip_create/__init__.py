@@ -13,7 +13,6 @@ def main():
     for question in question_list:
         question.ask()
 
-
     # Set up Jinja2 template engine
     env = jinja2.Environment(loader=jinja2.PackageLoader('pip_create',
                                                          'templates'),

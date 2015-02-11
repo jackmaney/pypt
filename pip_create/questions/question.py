@@ -1,5 +1,5 @@
 import abc
-from util import get_input
+from ..util import get_input
 
 
 class Question(object):

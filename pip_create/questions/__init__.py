@@ -1,6 +1,6 @@
 from default import SetupQuestion, VariableQuestion, ListVariableQuestion
 from choice import ChoiceQuestion
-from util import get_username, get_email
+from ..util import get_username, get_email, get_input
 from textwrap import dedent
 import os
 
