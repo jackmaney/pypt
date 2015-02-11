@@ -1,9 +1,9 @@
-try:
 {% if readme_file %}
-    long_description = open("{{readme_file}}").read()
-{% else %}
-    long_description = open("README.rst").read()
-{% endif %}
+try:
+    with open({{readme_file}}) as f:
+        long_description = f.read()
 except IOError:
     long_description = ""
-\n
+{% else %}
+long_description = ""
+{% endif %}

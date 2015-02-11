@@ -1,11 +1,11 @@
-from . import Question
+from question import Question
 from util import get_input
 
 
 class ChoiceQuestion(Question):
 
     def __init__(self, name, template_vars, description,
-                 choices, follow_ups, default=None):
+                 choices, follow_ups, default=None, message=None):
         self.description = description
 
         if not choices:
@@ -27,14 +27,14 @@ class ChoiceQuestion(Question):
         self.default = default
         self.follow_ups = follow_ups
 
-        super(ChoiceQuestion, self).__init__(name, template_vars)
+        super(ChoiceQuestion, self).__init__(name, template_vars, message)
 
     def _get_message(self):
 
         choice_str = "[{}]".format(",".join(self.choices))
 
         if self.default:
-            choice_str += "({}): "
+            choice_str += "({}): ".format(self.default)
         else:
             choice_str += ": "
 
@@ -51,8 +51,10 @@ class ChoiceQuestion(Question):
             if not user_input and self.default:
                 user_input = self.default
 
-            if user_input in self.choices:
+            if user_input in self.choices and user_input in self.follow_ups:
                 self.follow_ups[user_input].ask()
+                break
+            elif user_input in self.choices:
                 break
             else:
                 user_input = None
