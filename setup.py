@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from setuptools import setup
+from setuptools import setup, find_packages
 from pip_create._version import __version__
 
 
@@ -25,7 +25,7 @@ setup(
     author="Jack Maney",
     author_email="jackmaney@gmail.com",
     url="https://github.com/jackmaney/pip-create",
-    packages=['pip_create'],
+    packages=find_packages(),
     install_requires=requirements,
     entry_points={
         'console_scripts': [
