@@ -1,6 +1,7 @@
 from sys import version_info
 from subprocess import Popen, PIPE
 from getpass import getuser
+from temp_file import process_temp_file
 
 
 def get_input(input_msg):
