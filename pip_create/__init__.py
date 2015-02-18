@@ -1,11 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import jinja2
-from textwrap import dedent
-import os
-import re
-from _version import __version__
+import _version
 from questions import question_list, template_vars
+
+__version__ = _version.__version__
 
 
 def main():
