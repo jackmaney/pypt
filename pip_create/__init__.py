@@ -1,13 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import jinja2
-import _version
+from _version import __version__
 from questions import question_list, template_vars
-
-__version__ = _version.__version__
 
 
 def main():
+
+    print "pip-create version {}\n".format(__version__)
 
     for question in question_list:
         question.ask()

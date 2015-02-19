@@ -1,6 +1,6 @@
 from default import SetupQuestion, VariableQuestion, ListVariableQuestion
 from choice import ChoiceQuestion
-from util import get_input, get_origin, git_config
+from ..util import get_input, get_origin, git_config
 from textwrap import dedent
 import os
 

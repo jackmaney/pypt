@@ -45,7 +45,7 @@ def git_config(name):
 
     result = run_command(["git", "config", "--local", name])
 
-    if result is None:
+    if result is None or result == "":
         result = run_command(["git", "config", "--global", name])
 
     return result
