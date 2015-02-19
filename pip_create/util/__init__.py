@@ -1,7 +1,14 @@
 from sys import version_info
 from subprocess import Popen, PIPE
 from getpass import getuser
-from temp_file import process_temp_file
+from urlparse import urlparse
+import git
+
+try:
+    repo = git.Repo(path=".")
+
+except git.InvalidGitRepositoryError:
+    repo = None
 
 
 def get_input(input_msg):
@@ -12,44 +19,50 @@ def get_input(input_msg):
         return raw_input(input_msg)
 
 
-def get_username():
-    '''Get git config values.'''
-    username = ''
-
-    # use try-catch to prevent crashes if user doesn't install git
-    try:
-        # run git config --global <key> to get username
-        git_command = ['git', 'config', '--global', 'user.name']
-        p = Popen(git_command, stdout=PIPE, stderr=PIPE)
-        output, err = p.communicate()
-
-        # turn stdout into unicode and strip it
-        username = output.decode('utf-8').strip()
-
-        # if user doesn't set global git config name, then use getuser()
-        if not username:
-            username = getuser()
-    except OSError:
-        # if git command is not found, then use getuser()
-        username = getuser()
-
-    return username
+def url_parse(url):
+    if version_info >= (3, 0):
+        import urllib
+        return urllib.parse(url)
+    else:
+        from urlparse import urlparse
+        return urlparse(url)
 
 
-def get_email():
+def run_command(cmd):
 
     try:
-        git_command = ['git', 'config', '--global', 'user.email']
-        p = Popen(git_command, stdout=PIPE, stderr=PIPE)
+        p = Popen(cmd, stdout=PIPE, stderr=PIPE)
         output, err = p.communicate()
 
-        email = output.decode('utf-8').strip()
-
-        if not email:
-            return None
-        else:
-            return email
+        result = output.decode("utf-8").strip()
+        return result
 
     except OSError:
-
         return None
+
+
+def git_config(name):
+
+    result = run_command(["git", "config", "--local", name])
+
+    if result is None:
+        result = run_command(["git", "config", "--global", name])
+
+    return result
+
+
+def get_origin():
+
+    if repo is None:
+        return None
+
+    for remote in repo.remotes:
+
+        if remote.name == "origin":
+            parsed = url_parse(remote.url)
+
+            if parsed.hostname and parsed.netloc and \
+                    parsed.hostname != parsed.netloc:
+                return parsed.geturl().replace(parsed.netloc, parsed.hostname)
+            else:
+                return remote.url

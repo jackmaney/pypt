@@ -1,6 +1,6 @@
 from default import SetupQuestion, VariableQuestion, ListVariableQuestion
 from choice import ChoiceQuestion
-from ..util import get_username, get_email, get_input
+from util import get_input, get_origin, git_config
 from textwrap import dedent
 import os
 
@@ -44,11 +44,14 @@ long_description = ChoiceQuestion(name="Long Description",
 license = SetupQuestion(name="License", default="MIT",
                         template_vars=template_vars)
 
-author = SetupQuestion(name="Author", default=get_username(),
+author = SetupQuestion(name="Author", default=git_config("user.name"),
                        template_vars=template_vars)
 
-email = SetupQuestion(name="Author Email", default=get_email(),
+email = SetupQuestion(name="Author Email", default=git_config("user.email"),
                       key_name="author_email", template_vars=template_vars)
+
+url = SetupQuestion(name="URL", default=get_origin(),
+                    template_vars=template_vars)
 
 req_find = VariableQuestion(name="find_requirements",
                             template_vars=template_vars,
@@ -96,5 +99,5 @@ packages = ChoiceQuestion(name="Packages", template_vars=template_vars,
                           follow_ups={"f": find_packages, "s": package_list})
 
 question_list = [name, version, description,
-                 long_description, license, author, email,
+                 long_description, license, author, email, url,
                  requirements, packages]
