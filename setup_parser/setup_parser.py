@@ -3,6 +3,32 @@ import ast
 from warnings import warn
 
 
+def get_literal(node):
+    """
+    A simple helper function for grabbing certain literals (numbers, strings,
+    variable names, lists, and dicts) from ``ast.Node`` objects.
+
+    Mostly used for pretty printing and debugging.
+    """
+    result = None
+
+    if isinstance(node, ast.Str):
+        result = "'{}'".format(node.s)
+    elif isinstance(node, node.Num):
+        result = node.n
+    elif isinstance(node, ast.Name):
+        result = node.id
+    elif isinstance(node, ast.List):
+        result = [get_literal(x) for x in node.elts]
+    elif isinstance(node, ast.Dict):
+        result = {
+                  get_literal(k): get_literal(v)
+                  for k, v in zip(node.keys, node.values)
+                 }
+
+    return result
+
+
 class SetupKwargsVisitor(ast.NodeVisitor):
 
     def visit_Call(self, node):
