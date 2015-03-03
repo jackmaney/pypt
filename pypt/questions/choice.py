@@ -42,23 +42,27 @@ class ChoiceQuestion(Question):
 
     def ask(self):
 
-        user_input = None
+        while not self.user_input:
 
-        while not user_input:
+            self.user_input = get_input(self.message)
 
-            user_input = get_input(self.message)
+            if not self.user_input and self.default:
+                self.user_input = self.default
 
-            if not user_input and self.default:
-                user_input = self.default
+            if self.user_input in self.choices and \
+                    self.user_input in self.follow_ups:
 
-            if user_input in self.choices and user_input in self.follow_ups:
-                self.follow_ups[user_input].ask()
+                self.follow_ups[self.user_input].ask()
                 break
-            elif user_input in self.choices:
+            elif self.user_input in self.choices:
                 break
             else:
-                user_input = None
+                self.user_input = None
 
     def process(self):
-        # All processing is done by follow-up questions
-        pass
+        # The only way this should be called directly is to bypass
+        # asking the follow-up questions and just process the default
+        # follow-up.
+
+        if self.default in self.follow_ups:
+            self.follow_ups[self.default].process()

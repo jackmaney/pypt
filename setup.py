@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
-from pip_create._version import __version__
+from pypt._version import __version__
 
 
 try:
@@ -17,19 +17,19 @@ except IOError:
     requirements = []
 
 setup(
-    name="pip-create",
+    name="pypt",
     version=__version__,
-    description="Tools to create a Python distribution for use with pip",
+    description="Python Package Tools",
     long_description=long_description,
     license='MIT',
     author="Jack Maney",
     author_email="jackmaney@gmail.com",
-    url="https://github.com/jackmaney/pip-create",
+    url="https://github.com/jackmaney/pypt",
     packages=find_packages(),
     install_requires=requirements,
     entry_points={
         'console_scripts': [
-            'pip-create=pip_create:main',
+            'pypt=pypt:main',
         ],
     },
     include_package_data=True,

@@ -10,7 +10,7 @@ EDITOR = os.getenv("EDITOR", "vim")
 def process_temp_file(template_name, template_data=None):
     env = jinja2.Environment(
         loader=jinja2.PackageLoader(
-            'pip_create',
+            'pypt',
             'templates/temp_file'), extensions=['jinja2.ext.do'])
 
     template = env.get_template(template_name)

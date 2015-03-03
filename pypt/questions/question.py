@@ -10,6 +10,7 @@ class Question(object):
 
         self.name = name
         self.template_vars = template_vars
+        self.user_input = None
 
         if message is not None:
             self.message = message
@@ -22,13 +23,11 @@ class Question(object):
 
     def ask(self):
 
-        user_input = None
-
         if self.message:
-            user_input = get_input(self.message)
+            self.user_input = get_input(self.message)
 
-        self.process(user_input)
+        self.process()
 
     @abc.abstractmethod
-    def process(self, user_input):
+    def process(self):
         pass
