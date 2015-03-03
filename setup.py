@@ -17,7 +17,7 @@ except IOError:
     requirements = []
 
 setup(
-    name="pypt",
+    name="PyPT",
     version=__version__,
     description="Python Package Tools",
     long_description=long_description,

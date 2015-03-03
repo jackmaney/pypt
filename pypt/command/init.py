@@ -2,7 +2,7 @@
 Usage: pypt init [options]
 
     -h --help
-    -i --interactive   Interactive mode
+    -i --interactive   Interactive mode (without this flag, defaults are used)
 """
 
 from docopt import docopt
