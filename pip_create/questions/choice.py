@@ -1,5 +1,5 @@
 from question import Question
-from ..util import get_input
+from ..io import get_input
 
 
 class ChoiceQuestion(Question):

@@ -1,6 +1,7 @@
 from default import SetupQuestion, VariableQuestion, ListVariableQuestion
 from choice import ChoiceQuestion
-from ..util import get_input, get_origin, git_config
+from ..io import get_input
+from ..git_utils import get_origin, git_config
 from textwrap import dedent
 import os
 
@@ -44,10 +45,10 @@ long_description = ChoiceQuestion(name="Long Description",
 license = SetupQuestion(name="License", default="MIT",
                         template_vars=template_vars)
 
-author = SetupQuestion(name="Author", default=git_config("user.name"),
+author = SetupQuestion(name="Author", default=git_config("user", "name"),
                        template_vars=template_vars)
 
-email = SetupQuestion(name="Author Email", default=git_config("user.email"),
+email = SetupQuestion(name="Author Email", default=git_config("user", "email"),
                       key_name="author_email", template_vars=template_vars)
 
 url = SetupQuestion(name="URL", default=get_origin(),
