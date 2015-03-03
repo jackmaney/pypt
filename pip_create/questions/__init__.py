@@ -12,7 +12,7 @@ template_vars = {
     "requirements_file": None,
     "requirements_list": None,
     "find_packages": None,
-    "packages_list": None,
+    "package_list": None,
 }
 
 name = SetupQuestion(name="Name", default=os.path.relpath(".", os.pardir),
@@ -80,13 +80,13 @@ requirements = ChoiceQuestion(name="Requirements", template_vars=template_vars,
 
 find_packages = VariableQuestion(name="find_packages", message="",
                                  template_vars=template_vars,
-                                 default=True,
+                                 default=False,
                                  variable_name="find_packages")
 
 package_list = ListVariableQuestion(name="package_list",
                                     message="Please specify a comma-delimited \
 list of packages in your distribution:\n", template_vars=template_vars,
-                                    variable_name="packages_list")
+                                    variable_name="package_list")
 
 package_description = dedent("""
     Would you like to use [f]ind_packages from setuptools to find the packages

@@ -12,18 +12,20 @@ def url_parse(url):
 
 
 def get_origin():
-    if repo is None:
-        raise ValueError("No repo found!")
 
-    for remote in repo.remotes:
+    result = None
 
-        if remote.name == "origin":
-            parsed = url_parse(remote.url)
+    if repo is not None:
+        for remote in repo.remotes:
 
-            if parsed.hostname and parsed.netloc and \
-                    parsed.hostname != parsed.netloc:
-                return parsed.geturl().replace(parsed.netloc, parsed.hostname)
-            else:
-                return remote.url
+            if remote.name == "origin":
+                parsed = url_parse(remote.url)
 
-    return None
+                if parsed.hostname and parsed.netloc and \
+                        parsed.hostname != parsed.netloc:
+                    result = parsed.geturl().replace(
+                        parsed.netloc, parsed.hostname)
+                else:
+                    result = remote.url
+
+    return result

@@ -7,7 +7,7 @@ except IOError:
     requirements = []
 {% set update_requirements = 1 %}
 {% elif requirements_list %}
-requirements=[{{requirements_list | join(', ')}}]
+requirements={{requirements_list}}
 {% set update_requirements = 1 %}
 {% endif %}
 

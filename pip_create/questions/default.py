@@ -70,6 +70,7 @@ class ListVariableQuestion(VariableQuestion):
 
         if user_input:
             result = "[{}]".format(",".join([
-                "'{}'".format(x) for x in
+                "'{}'".format(x.strip()) for x in
                 re.split("\s*,\s*", user_input) if x]))
+            result = re.sub("\s+", "", result)
             self.template_vars[self.variable_name] = result
