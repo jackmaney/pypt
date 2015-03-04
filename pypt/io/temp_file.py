@@ -6,6 +6,9 @@ import re
 
 EDITOR = os.getenv("EDITOR", "vim")
 
+# TODO: When we get ready to use this, make it conform to
+# templates.get_template
+
 
 def process_temp_file(template_name, template_data=None):
     env = jinja2.Environment(

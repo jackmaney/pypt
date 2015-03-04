@@ -8,8 +8,7 @@ Usage: pypt init [options]
 from docopt import docopt
 from ..questions import question_list, template_vars
 from .._version import __version__
-
-import jinja2
+from ..templates import get_template
 
 
 def init(argv):
@@ -27,12 +26,7 @@ def init(argv):
         for question in question_list:
             question.process()
 
-    # Set up Jinja2 template engine
-    env = jinja2.Environment(loader=jinja2.PackageLoader('pypt',
-                                                         'templates'),
-                             extensions=['jinja2.ext.do'])
-
-    template = env.get_template("base.j2")
+    template = get_template("init", extensions=["jinja2.ext.do"])
 
     setup_content = template.render(template_vars)
 
