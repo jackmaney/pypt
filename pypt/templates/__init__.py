@@ -22,8 +22,6 @@ def get_template(template_type, template_name="base.j2", extensions=None):
 
     loader_dir = os.path.join(base_dir, template_type)
 
-    print "loader_dir={}".format(loader_dir)
-
     if extensions is None:
         extensions = []
 

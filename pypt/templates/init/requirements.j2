@@ -1,7 +1,7 @@
 {% set update_requirements = 0 %}
 {% if requirements_file %}
 try:
-    with open("{{requirements_file}}") as f:
+    with open({{requirements_file}}) as f:
         requirements = [x for x in [y.strip() for y in f.readlines()] if x]
 except IOError:
     requirements = []

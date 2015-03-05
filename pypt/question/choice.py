@@ -4,7 +4,7 @@ from ..io import get_input
 
 class ChoiceQuestion(Question):
 
-    def __init__(self, name, template_vars, description,
+    def __init__(self, name, series, description,
                  choices, follow_ups, default=None, message=None):
         self.description = description
 
@@ -27,7 +27,8 @@ class ChoiceQuestion(Question):
         self.default = default
         self.follow_ups = follow_ups
 
-        super(ChoiceQuestion, self).__init__(name, template_vars, message)
+        super(ChoiceQuestion, self).__init__(name, series=series,
+                                             message=message)
 
     def _get_message(self):
 
