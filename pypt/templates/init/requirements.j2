@@ -14,8 +14,8 @@ requirements={{requirements_list}}
 {% if update_requirements > 0 %}
 {#
     Setting install_requires=requirements within the setup function.
-    This requires setup_kwargs to be defined outside of this scope!!!
+    This requires setup to be defined outside of this scope!!!
 #}
-{% do setup_kwargs.update({"install_requires":"requirements"}) %}
+{% do setup.update({"install_requires":"requirements"}) %}
 {% endif %}
 \n

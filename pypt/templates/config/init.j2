@@ -1,29 +1,36 @@
 {
-        "version": "0.0.0",
         "readme_file": "README.rst",
         "license": "MIT",
 
         # Name of requirements.txt file
         "requirements_file_name": "{{init.requirements_file_name|default("requirements.txt")}}",
 
+        # Take long description from a file? "y"/"n"
+        "long_description_from_file": "{{init.long_description_from_file|default("y")}}",
+        # If "y", what file do you want to use for the long_description?
+        "long_description_file_name": "{{init.long_description_file_name|default("README.rst")}}",
+
         "setup": {
+            "version": "{{init.setup.version}}"
             # How to get requirements. Values:
             #
-            # * "f" or "file": From a file
-            # * "s" or "specify": Specify a list
-            "requirements": "{{init.setup.requirements|default("file")}}"
+            # * "f": From a file
+            # * "s": Specify a list
+            # * "n": Do not specify requirements
+            ,"requirements_choice": "{{init.setup.requirements_choice|default("f")}}"
 
             # How to get packages. Values:
             #
-            # * "f" or "find_packages": Use find_packages in setuptoolls
-            # * "s" or "specify": Specify a list
-            ,"packages": "{{init.setup.packages|default("find_packages")}}"
+            # * "f": Use find_packages in setuptoolls
+            # * "s": Specify a list
+            # * "n": Do not specify packages
+            ,"packages_choice": "{{init.setup.packages_choice|default("f")}}"
 
             {% if init.setup.author or init.setup.email %}
             # Allow default set up of author and email
             {% endif %}
             {% if init.setup.author %},"author": "{{init.setup.author}}"{% endif %}
-            {% if init.setup.email %},"email": "{{init.setup.email}}"{% endif %}
+            {% if init.setup.author_email %},"author_email": "{{init.setup.author_email}}"{% endif %}
             {% if not global_config and init.setup.url %}# URL is only for local config
             ,"url": "{{init.setup.url}}"
             {% endif %}

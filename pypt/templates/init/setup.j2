@@ -1,6 +1,6 @@
 setuptools.setup(
-{% if setup_kwargs %}
-{% for name, value in setup_kwargs.iteritems() %}
+{% if setup %}
+{% for name, value in setup.iteritems() %}
     {{name}}={{value}},
     {% endfor %}
     {% endif %}

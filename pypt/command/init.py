@@ -6,7 +6,7 @@ Usage: pypt init [options]
 """
 
 from docopt import docopt
-from ..question.series.init import series
+from ..question.series.init import get_series
 from .._version import __version__
 from ..templates import get_template
 
@@ -17,6 +17,9 @@ def init(argv):
 
     args = docopt(__doc__, argv=argv)
 
+    series = get_series()
+    print "Got {} questions".format(len(series))
+
     if args["--interactive"]:
 
         print "pypt version {}\n".format(__version__)
@@ -26,11 +29,15 @@ def init(argv):
 
         series.process()
 
-    print series.template_vars
+    # print series.template_vars
+
+    print ""
+    print "After asking questions, template_vars={}".format(series.template_vars)
+    print ""
 
     template = get_template("init", extensions=["jinja2.ext.do"])
 
-    setup_content = template.render(series.template_vars)
+    setup_content = template.render(**series.template_vars)
 
     setup_content = "\n".join([x for x in setup_content.split("\n")
                                if x.strip()])

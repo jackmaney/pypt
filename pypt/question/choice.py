@@ -17,18 +17,12 @@ class ChoiceQuestion(Question):
                     default, ",".join(choices)
                 ))
 
-        for choice in choices:
-            if choice != default and choice not in follow_ups:
-                raise ValueError(
-                    "Non-default choice {} needs a follow-up question".format(
-                        default
-                    ))
         self.choices = choices
         self.default = default
         self.follow_ups = follow_ups
 
         super(ChoiceQuestion, self).__init__(name, series=series,
-                                             message=message)
+                                             message=message, default=default)
 
     def _get_message(self):
 
@@ -52,10 +46,11 @@ class ChoiceQuestion(Question):
 
             if self.user_input in self.choices and \
                     self.user_input in self.follow_ups:
-
+                print "In question {}, choosing {}".format(self.name, self.user_input)
                 self.follow_ups[self.user_input].ask()
                 break
             elif self.user_input in self.choices:
+                print "In question {}, breaking on {}".format(self.name, self.user_input)
                 break
             else:
                 self.user_input = None
@@ -66,4 +61,6 @@ class ChoiceQuestion(Question):
         # follow-up.
 
         if self.default in self.follow_ups:
+            print "Processing choice question {}, option {}".format(self.name, self.default)
+            print "Trying to ask question {}".format(self.follow_ups[self.default].name)
             self.follow_ups[self.default].process()

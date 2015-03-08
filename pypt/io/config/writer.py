@@ -34,7 +34,8 @@ def write_default_config(global_config=True):
         "init": {
             "setup": {
                 "author": author,
-                "email": email
+                "author_email": email,
+                "version": "0.0.0"
             }
         }
     }
@@ -62,7 +63,7 @@ def write_config(config_data, global_config=True):
         config_file = local_config_file
 
     if not os.path.exists(config_file):
-        to_default_config(global_config=global_config)
+        write_default_config(global_config=global_config)
 
     old_config_data = from_file(config_file)
 

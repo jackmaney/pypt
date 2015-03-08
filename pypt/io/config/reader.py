@@ -9,9 +9,10 @@ def read_config():
 
     result = None
 
-    if os.path.isfile(local_config_file):
+    if os.path.exists(local_config_file) and os.path.isfile(local_config_file):
         result = from_file(local_config_file)
-    elif os.path.isfile(global_config_file):
+    elif os.path.exists(global_config_file) and \
+            os.path.isfile(global_config_file):
         result = from_file(global_config_file)
 
     return result

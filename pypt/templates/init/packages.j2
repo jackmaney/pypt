@@ -1,6 +1,6 @@
 {% if find_packages %}
-{% do setup_kwargs.update({"packages": "setuptools.find_packages()"}) %}
+{% do setup.update({"packages": "setuptools.find_packages()"}) %}
 {% elif package_list %}
-{% do setup_kwargs.update({"packages": package_list}) %}
+{% do setup.update({"packages": package_list}) %}
 {% endif %}
 \n
