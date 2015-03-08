@@ -3,6 +3,7 @@ from .. import get_template
 
 import commentjson
 import os
+import sys
 
 
 def read_config():
@@ -25,10 +26,16 @@ def from_string(string):
 
 def from_file(file_name=global_config_file):
 
-    with open(file_name) as f:
-        result = f.read()
+    result = None
 
-    return from_string(result)
+    try:
+        with open(file_name) as f:
+            result = from_string(f.read())
+    except IOError:
+        msg = "Warning: No configuration file found at {}".format(file_name)
+        print >> sys.stderr, msg
+
+    return result
 
 
 def from_template(template_type, template_vars=None,

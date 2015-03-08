@@ -1,3 +1,4 @@
 from init import init
+from config import config
 
-commands = {"init": init}
+commands = {"init": init, "config": config}
