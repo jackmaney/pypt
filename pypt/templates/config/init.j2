@@ -1,0 +1,31 @@
+{
+        "version": "0.0.0",
+        "readme_file": "README.rst",
+        "license": "MIT",
+
+        # Name of requirements.txt file
+        "requirements_file_name": "{{init.requirements_file_name|default("requirements.txt")}}",
+
+        "setup": {
+            # How to get requirements. Values:
+            #
+            # * "f" or "file": From a file
+            # * "s" or "specify": Specify a list
+            "requirements": "{{init.setup.requirements|default("file")}}"
+
+            # How to get packages. Values:
+            #
+            # * "f" or "find_packages": Use find_packages in setuptoolls
+            # * "s" or "specify": Specify a list
+            ,"packages": "{{init.setup.packages|default("find_packages")}}"
+
+            {% if init.setup.author or init.setup.email %}
+            # Allow default set up of author and email
+            {% endif %}
+            {% if init.setup.author %},"author": "{{init.setup.author}}"{% endif %}
+            {% if init.setup.email %},"email": "{{init.setup.email}}"{% endif %}
+            {% if not global_config and init.setup.url %}# URL is only for local config
+            ,"url": "{{init.setup.url}}"
+            {% endif %}
+        }
+    }

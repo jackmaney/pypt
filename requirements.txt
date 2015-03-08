@@ -1,3 +1,4 @@
+commentjson
 docopt
 gitpython
 jinja2

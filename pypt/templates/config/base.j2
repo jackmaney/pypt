@@ -1,0 +1,12 @@
+{
+    # Please do not touch pypt_version: this may be used for conversion of
+    # config files as PyPT's API changes.
+    "pypt_version": "{{pypt_version}}",
+
+    # These are the default actions that are taken when a
+    #
+    #     pypt init
+    #
+    # is done (ie not in interactive mode)
+    "init": {% include "init.j2" %}
+}
