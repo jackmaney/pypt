@@ -44,7 +44,6 @@ class SetupQuestion(Question):
 
     def process(self):
         super(SetupQuestion, self).process()
-        print "{}={}".format(self.key, self.user_input)
 
 
 def get_series():
@@ -52,20 +51,13 @@ def get_series():
     config_data = reader.read_config()
 
     if config_data is None:
-        msg = "Warning: No configuration file found. Creating a \
-    configuration file at {}".format(reader.global_config_file)
+        msg = dedent("Warning: No configuration file found. Creating a \
+    configuration file at {}".format(reader.global_config_file))
         print >> sys.stderr, msg
         writer.write_default_config()
         config_data = reader.read_config()
 
     config_data = config_data["init"]
-
-    print ""
-    print "config_data = {}".format(config_data)
-    print ""
-
-    print config_data.get("setup").get(
-        "packages_choice", "n")
 
     _initial_setup_args = [
         "name", "author", "author_email", "version",
@@ -83,10 +75,6 @@ def get_series():
         "package_list": None,
     }
 
-    print ""
-    print "template_vars = {}".format(template_vars)
-    print ""
-
     series = Series(template_vars=template_vars)
 
     name = SetupQuestion(name="Name", default=os.path.relpath(".", os.pardir),
@@ -102,14 +90,14 @@ def get_series():
                                 series=series)
 
     long_desc_file = Question(name="long_desc_file", series=series,
-                              message="Great! Which file do you want to use for \
-a long description?\n[README.rst]",
+                              message=dedent("Great! Which file do you want to use for \
+a long description?\n[README.rst]"),
                               default=config_data.get("readme_file",
                                                       "README.rst"),
                               key="readme_file")
 
-    ld_description = "Would you like to pull in a long description from a file \
-    (usually a README)?"
+    ld_description = dedent("Would you like to pull in a long description from a file \
+    (usually a README)?")
 
     long_description = ChoiceQuestion(name="Long Description",
                                       series=series,
@@ -138,14 +126,14 @@ a long description?\n[README.rst]",
 
     req_find = Question(name="find_requirements",
                         series=series,
-                        message="Great! Which file do you want to use to specify \
-    requirements?\n[requirements.txt]",
+                        message=dedent("Great! Which file do you want to use to specify \
+    requirements?\n[requirements.txt]"),
                         default="requirements.txt",
                         key="requirements_file")
 
     req_list = Question(name="req_list",
-                        message="Please specify a comma-delimited list \
-    of requirements:\n", series=series,
+                        message=dedent("Please specify a comma-delimited list \
+    of requirements:\n"), series=series,
                         key="requirements_list",
                         update_function=update_comma_sep_list,
                         quote_user_input=False)
@@ -167,8 +155,8 @@ a long description?\n[README.rst]",
                              quote_user_input=False)
 
     package_list = Question(name="package_list",
-                            message="Please specify a comma-delimited \
-list of packages in your distribution:\n", series=series,
+                            message=dedent("Please specify a comma-delimited \
+list of packages in your distribution:\n"), series=series,
                             key="package_list",
                             update_function=update_comma_sep_list,
                             quote_user_input=False)

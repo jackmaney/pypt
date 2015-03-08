@@ -46,11 +46,9 @@ class ChoiceQuestion(Question):
 
             if self.user_input in self.choices and \
                     self.user_input in self.follow_ups:
-                print "In question {}, choosing {}".format(self.name, self.user_input)
                 self.follow_ups[self.user_input].ask()
                 break
             elif self.user_input in self.choices:
-                print "In question {}, breaking on {}".format(self.name, self.user_input)
                 break
             else:
                 self.user_input = None
@@ -61,6 +59,4 @@ class ChoiceQuestion(Question):
         # follow-up.
 
         if self.default in self.follow_ups:
-            print "Processing choice question {}, option {}".format(self.name, self.default)
-            print "Trying to ask question {}".format(self.follow_ups[self.default].name)
             self.follow_ups[self.default].process()

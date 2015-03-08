@@ -18,7 +18,6 @@ def init(argv):
     args = docopt(__doc__, argv=argv)
 
     series = get_series()
-    print "Got {} questions".format(len(series))
 
     if args["--interactive"]:
 
@@ -28,12 +27,6 @@ def init(argv):
     else:
 
         series.process()
-
-    # print series.template_vars
-
-    print ""
-    print "After asking questions, template_vars={}".format(series.template_vars)
-    print ""
 
     template = get_template("init", extensions=["jinja2.ext.do"])
 

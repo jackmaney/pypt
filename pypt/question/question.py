@@ -24,7 +24,6 @@ class Question(object):
         self.update_function = update_function
         self.do_not_ask = do_not_ask
         self.quote_user_input = quote_user_input
-        print "In question {}, default = {}".format(self.name, self.default)
 
     def _get_message(self):
 
@@ -57,11 +56,8 @@ class Question(object):
 
         if self.user_input and self.series and \
                 self.key and self.series.template_vars:
-            print "SERIOUSLY, WTF?!"
             if self.quote_user_input:
-                print "In question {}, trying to wrap quotes around user input!".format(self.name)
                 self.user_input = '"{}"'.format(self.user_input)
-            print "None" if self.user_input is None else self.user_input
 
             if hasattr(self.update_function, "__call__"):
                 self.update_function(self)
